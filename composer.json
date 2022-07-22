@@ -1,0 +1,24 @@
+{
+    "name": "euskova/php-blog",
+    "description": "Blog on PHP and MySQL",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "Euskova\\PhpBlog\\": "src/",
+            "Blog\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "euskova",
+            "email": "euskova@turbosolution.ru"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "slim/slim": "4.*",
+        "slim/psr7": "^1.5",
+        "twig/twig": "^3.4",
+        "ext-pdo": "*"
+    }
+}
