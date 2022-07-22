@@ -37,4 +37,16 @@ class PostMapper
 
         return array_shift($result);
     }
+
+    public function getList(string $direction): ?array 
+    {
+        if (!in_array($direction, ['ASC', 'DESC'])) {
+            throw new Exception('The direction is not supported.');
+        }
+        $statement = $this->connection->prepare('SELECT * FROM post ORDER BY published_date ' . $direction);
+
+        $statement->execute();
+
+        return $statement->fetchAll();
+    }
 }
