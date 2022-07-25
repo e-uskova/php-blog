@@ -2,6 +2,7 @@
 
  {% block body %}
  
+<<<<<<< .mine
 <h3 class="mb-3 mt-3">Latest posts</h3>   
 <div class="container">    
   <div class="row">
@@ -10,6 +11,64 @@
       <div class="row">
         <a href="\blog">View all</a>
       </div>                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+=======
+    <div class="container">    
+        <h3 class="mb-3 mt-3">Latest posts</h3>   
+        <div class="row">
+            <div class="col-md-9">
+                {% for post in posts %}
+                    <div class="row mb-2 bg-light" style="border: 1px solid #ddd;">
+                        <div class="p-3">
+                            {% if post.image_path is not null %}
+                                <img src="{{ post.image_path }}" class="card-img-top" alt="{{ post.title|escape }}">
+                            {% endif %}
+                            <div class="mt-3">
+                                <a href="/{{ post.url_key }}"><h5 class="card-title">{{ post.title|escape }}</h5></a> 
+                                <span class="text-muted">Ekaterina Uskova | {{ post.published_date|date("F d, Y") }}</span>
+                                <p class="mt-2">{{ post.description|escape }}</p>
+                                <a href="/{{ post.url_key }}">Read more</a>
+                            </div>
+                        </div>
+                    </div>                
+                {% endfor %}  
+                <div class="row">
+                    <a href="\blog">View all</a>
+                </div>                
+            </div>
+            <div class="col-md-3">
+                <div class="container">
+                    <div class="h4">About</div>
+                    <p>Hello, my name is Ekaterina Uskova. I am a web developer and a cat lover.</p>
+                </div>
+            </div>
+        </div>
+
+
+>>>>>>> .theirs
     </div>
     <div class="col-md-3">
       {% include 'section/about.twig' %}
