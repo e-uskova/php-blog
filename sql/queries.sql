@@ -32,4 +32,4 @@ DROP TABLE post;
 
 SELECT * FROM post;
 
-UPDATE post SET image_path = 'public/images/Oriental_cat_02.jpg' WHERE post_id = 2;
+UPDATE post SET image_path = 'public/images/Oriental_cat_02.jpg' WHERE post_id = 9;
