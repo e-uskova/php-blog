@@ -21,7 +21,7 @@ class TwigMiddleware implements MiddlewareInterface
   /**
    * @param mixed $environment
    */
-  public function __construct($environment)
+  public function __construct(Environment $environment)
   {
     $this->environment = $environment;
   }
