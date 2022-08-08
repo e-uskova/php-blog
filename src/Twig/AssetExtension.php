@@ -11,16 +11,25 @@ use Twig\TwigFunction;
 class AssetExtension extends AbstractExtension
 {
   /**
-   * @var ServerRequestInterface
+   * @var array
    */
-  private ServerRequestInterface $request;
+  private array $serverParams;
 
   /**
-   * @param ServerRequestInterface $request
+   * @var TwigFunctionFactory
    */
-  public function __construct(ServerRequestInterface $request)
-  {
-    $this->request = $request;
+  private TwigFunctionFactory $twigFunctionFactory;
+  
+  /**
+   * @param array $serverParams
+   * @param TwigFunctionFactory $twigFunctionFactory
+   */
+  public function __construct(    
+    array $serverParams,    
+    TwigFunctionFactory $twigFunctionFactory
+  )  {
+    $this->serverParams = $serverParams;
+    $this->twigFunctionFactory = $twigFunctionFactory;
   }
 
   /**
@@ -29,9 +38,9 @@ class AssetExtension extends AbstractExtension
   public function getFunctions()
   {
     return [
-      new TwigFunction('asset_url', [$this, 'getAssetUrl']),
-      new TwigFunction('url', [$this, 'getUrl']),
-      new TwigFunction('base_url', [$this, 'getBaseUrl']),
+      $this->twigFunctionFactory->create('asset_url', [$this, 'getAssetUrl']),
+      $this->twigFunctionFactory->create('url', [$this, 'getUrl']),
+      $this->twigFunctionFactory->create('base_url', [$this, 'getBaseUrl']),
     ];
   }
 
@@ -42,7 +51,7 @@ class AssetExtension extends AbstractExtension
    */
   public function getAssetUrl(string $path): string
   {
-    return $this->getBaseUrl() . $path;
+    return $this->serverParams . $path;
   }
 
   /**
@@ -50,9 +59,8 @@ class AssetExtension extends AbstractExtension
    */
   public function getBaseUrl(): string
   {
-    $params = $this->request->getServerParams();
-    $scheme = $params['REQUEST_SCHEME'] ?? 'http';
-    return $scheme . '://' . $params['HTTP_HOST'] . '/';
+      $scheme = $this->serverParams['REQUEST_SCHEME'] ?? 'http';
+    return $scheme . '://' . $this->serverParams['HTTP_HOST'] . '/';
   }
 
   /**
