@@ -51,7 +51,7 @@ class AssetExtension extends AbstractExtension
    */
   public function getAssetUrl(string $path): string
   {
-    return $this->serverParams . $path;
+    return $this->getBaseUrl() . $path;
   }
 
   /**
