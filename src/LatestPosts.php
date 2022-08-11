@@ -29,8 +29,10 @@ class LatestPosts
     public function get(int $limit): ?array
     {
         $statement = $this->database->getConnection()->prepare(
-            'SELECT * FROM post ORDER BY published_date DESC LIMIT ' . $limit
+            'SELECT * FROM post ORDER BY published_date DESC LIMIT :limit' 
         );
+
+        $statement->bindParam(':limit', $limit, PDO::PARAM_INT);
 
         $statement->execute();
 
